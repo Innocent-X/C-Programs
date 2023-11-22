@@ -13,9 +13,9 @@ void print_Matrix(double **matrix, int rows, int columns)
         printf("\n");
     }
 }
-long long int determinant(double **matrix, int rows, int columns)
+double determinant(double **matrix, int rows, int columns)
 {
-    long long int determinant = 1;
+    double determinant = 1;
     int row = 0;
 
     for (int col = 0; col < columns; col++)
@@ -92,6 +92,11 @@ int main() {
 
     printf("Enter the number of columns : ");
     scanf("%d", &col);
+     if (rows!=col)
+    {
+        puts("Inverse can not be calculated.Matrix should be square.");
+        return 0;
+    }
 
     double **matrix; 
 
@@ -111,7 +116,15 @@ int main() {
     }
     printf("%s\n","Matrix you enter:");
     print_Matrix(matrix,rows,col);
-    printf("Determinant of matrix is  %lld\n",determinant(matrix, rows, col));
+    printf("Determinant of matrix is  %.2lf\n",determinant(matrix, rows, col));
 
+    
+    for (int i = 0; i < rows; i++)
+    {
+        free(matrix[i]);
+    }
+    free(matrix);
     return 0;
+
+    
 }
