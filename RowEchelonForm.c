@@ -11,7 +11,7 @@ void print_Matrix(double **matrix, int rows, int columns) {
         printf("\n");
     }
 }
-double **convert_into_ref(double **matrix, int rows, int columns)
+void **convert_into_ref(double **matrix, int rows, int columns)
 {
     int row = 0;
 
@@ -55,7 +55,6 @@ double **convert_into_ref(double **matrix, int rows, int columns)
 
         row++;
     }
-    return matrix;
 }
 int main() {
   
@@ -85,11 +84,14 @@ int main() {
     }
     printf("%s\n","Matrix you enter:");
     print_Matrix(matrix,rows,col);
-    matrix=convert_into_ref(matrix,rows,col);
+    convert_into_ref(matrix,rows,col);
     printf("%s\n","Matrix row echelon form:");
     print_Matrix(matrix,rows,col);
 
-
-
+  for (int i = 0; i < rows; i++)
+    {
+        free(matrix[i]);
+    }
+    free(matrix);
     return 0;
 }
